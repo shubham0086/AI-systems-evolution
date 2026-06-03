@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI Systems Evolution — From Code to Swarm</title>
+<style>
+  :root{
+    --bg:#0c0f19; --panel:#121726; --line:#1e293b; --text:#f8fafc;
+    --muted:#94a3b8; --accent:#5b5ef4; --accent2:#14b8a6; --code:#0a0d16;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);
+    font-family:'Inter',system-ui,Segoe UI,Roboto,sans-serif;line-height:1.6}
+  header{padding:3rem 1.25rem 1.5rem;text-align:center;max-width:760px;margin:0 auto}
+  h1{font-size:1.9rem;margin:0 0 .4rem;font-weight:700}
+  .sub{color:var(--muted);margin:0 auto;max-width:560px}
+  .ladder{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;
+    max-width:900px;margin:2rem auto 0;padding:0 1rem}
+  .rung{flex:1;min-width:120px;background:var(--panel);border:1px solid var(--line);
+    border-radius:12px;padding:.9rem .7rem;cursor:pointer;text-align:center;
+    transition:.15s;position:relative}
+  .rung:hover{transform:translateY(-3px);border-color:var(--accent)}
+  .rung.active{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent),0 8px 30px rgba(91,94,244,.25)}
+  .rung .n{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--accent2);letter-spacing:.05em}
+  .rung .t{font-weight:600;font-size:.92rem;margin-top:.25rem}
+  .arrow{align-self:center;color:var(--muted);font-size:1.1rem}
+  .detail{max-width:900px;margin:2rem auto;padding:0 1.25rem}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+  .card-head{padding:1.2rem 1.4rem;border-bottom:1px solid var(--line)}
+  .card-head h2{margin:0;font-size:1.25rem}
+  .card-head .adds{color:var(--accent2);font-size:.85rem;margin-top:.3rem;font-weight:600}
+  .card-body{display:grid;grid-template-columns:1fr 1fr;gap:0}
+  @media(max-width:680px){.card-body{grid-template-columns:1fr}}
+  .pane{padding:1.2rem 1.4rem}
+  .pane h3{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 .6rem}
+  pre{background:var(--code);border:1px solid var(--line);border-radius:10px;
+    padding:.9rem;overflow:auto;margin:0;font-size:.78rem;
+    font-family:'JetBrains Mono',ui-monospace,monospace;color:#cbd5e1}
+  .trace div{font-family:'JetBrains Mono',monospace;font-size:.78rem;margin:.2rem 0;color:#cbd5e1}
+  .trace .step{color:var(--accent)}
+  .trace .out{color:var(--accent2)}
+  .meta{display:flex;gap:1.2rem;flex-wrap:wrap;margin-top:.8rem;font-size:.8rem;color:var(--muted)}
+  .meta b{color:var(--text);font-weight:600}
+  footer{text-align:center;color:var(--muted);font-size:.82rem;padding:2rem 1rem 3rem}
+  a{color:var(--accent)}
+</style>
+</head>
+<body>
+<header>
+  <h1>AI Systems Evolution</h1>
+  <p class="sub">The same task — <em>"write a 3-bullet brief on a topic"</em> — solved at six levels of autonomy. Click a rung.</p>
+</header>
+
+<div class="ladder" id="ladder"></div>
+<div class="detail"><div class="card" id="card"></div></div>
+
+<footer>
+  Built by <a href="https://github.com/shubham0086">Shubham Prajapati</a> ·
+  Run the real code: <code>node 03-agent/main.js</code> · MIT / CC BY 4.0
+</footer>
+
+<script>
+const RUNGS = [
+  { n:"00", t:"Plain Code", adds:"Baseline — deterministic, no model",
+    decides:"Human (at write time)", tools:"none", memory:"none", calls:"0",
+    code:`function brief(topic){\n  return [\n    "Origin: <human fills in>",\n    "Turning point: <human fills in>",\n    "Today: <human fills in>"\n  ];\n}`,
+    trace:[["step","runs hard-coded function"],["out","output is generic, no understanding"]] },
+  { n:"01", t:"Single Call", adds:"Adds intelligence — one shot, stateless",
+    decides:"Human (the prompt)", tools:"none", memory:"none", calls:"1",
+    code:`const reply = await llm([\n  {role:"system", content:"concise analyst"},\n  {role:"user", content: TASK}\n]);`,
+    trace:[["step","one prompt → one completion"],["out","real brief, but it can't look anything up"]] },
+  { n:"02", t:"Workflow", adds:"Adds reliability — fixed chain, on rails",
+    decides:"Human (the pipeline)", tools:"optional", memory:"passed along", calls:"N fixed",
+    code:`const outline = await llm("OUTLINE: "+TASK);\nconst draft   = await llm("DRAFT from: "+outline);\nconst final   = await llm("POLISH: "+draft);`,
+    trace:[["step","1 → outline"],["step","2 → draft"],["step","3 → polish"],["out","predictable, but can't deviate"]] },
+  { n:"03", t:"Agent", adds:"Adds autonomy — the MODEL picks the path",
+    decides:"The model", tools:"yes", memory:"within the run", calls:"N variable",
+    code:`while(step++ < 5){\n  const m = await llm(messages, {tools});\n  if(m.tool_calls){ runTool(m); continue; }\n  return m.content; // model decided it's done\n}`,
+    trace:[["step","agent CHOSE: web_search('topic')"],["step","reads results, decides to answer"],["out","final brief — nobody scripted these steps"]] },
+  { n:"04", t:"Agentic Team", adds:"Adds specialization — roles + orchestrator",
+    decides:"Orchestrator", tools:"yes", memory:"shared blackboard", calls:"many",
+    code:`await planner();   // writes plan to blackboard\nawait worker();    // drafts using tools\nawait reviewer();  // critiques & approves`,
+    trace:[["step","planner → plan"],["step","worker → draft (used a tool)"],["step","reviewer → approved"],["out","division of labor, shared state"]] },
+  { n:"05", t:"Swarm", adds:"Adds emergence — peers, no boss",
+    decides:"Emergent (no one)", tools:"yes", memory:"shared/peer", calls:"many",
+    code:`let b = await Promise.all(peers.map(propose));   // round 1: blind\nb = await Promise.all(peers.map(p =>\n      propose(p, others(b))));                   // round 2: peer-aware`,
+    trace:[["step","round 1 — 3 peers work independently"],["step","round 2 — each sees the others & adjusts"],["out","brief emerged with no orchestrator"]] },
+];
+
+const ladder = document.getElementById('ladder');
+RUNGS.forEach((r,i)=>{
+  const el = document.createElement('div');
+  el.className='rung'; el.innerHTML=`<div class="n">RUNG ${r.n}</div><div class="t">${r.t}</div>`;
+  el.onclick=()=>select(i);
+  ladder.appendChild(el);
+  if(i<RUNGS.length-1){const a=document.createElement('div');a.className='arrow';a.textContent='→';ladder.appendChild(a);}
+});
+
+function select(i){
+  document.querySelectorAll('.rung').forEach((e,j)=>e.classList.toggle('active', j===i));
+  const r=RUNGS[i];
+  document.getElementById('card').innerHTML=`
+    <div class="card-head">
+      <h2>Rung ${r.n} — ${r.t}</h2>
+      <div class="adds">${r.adds}</div>
+      <div class="meta">
+        <span><b>Decides the steps:</b> ${r.decides}</span>
+        <span><b>Tools:</b> ${r.tools}</span>
+        <span><b>Memory:</b> ${r.memory}</span>
+        <span><b>LLM calls:</b> ${r.calls}</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="pane"><h3>The code (essence)</h3><pre>${r.code.replace(/</g,'&lt;')}</pre></div>
+      <div class="pane"><h3>Simulated run</h3><div class="trace">${
+        r.trace.map(([c,t])=>`<div class="${c}">${c==='out'?'└─ ':'• '}${t}</div>`).join('')
+      }</div></div>
+    </div>`;
+}
+select(3); // open on "Agent" — the most important rung
+</script>
+</body>
+</html>
