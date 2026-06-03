@@ -15,7 +15,7 @@ node main.js          # mock : watch it "choose" the tool, then answer
 LLM_MOCK=0 node main.js
 ```
 
-**Real tools that live here:** ChatGPT with tools or browsing turned on (it decides whether to search or answer directly). Claude with computer use. Cursor in agent mode (it reads the error, edits the file, runs again — the model drives the loop). Perplexity AI (searches → reads pages → synthesizes, model picks what to fetch). Open Interpreter (executes code, reads the output, keeps going). Hermes 3 on Ollama (an open-source model built specifically for tool-calling and agent loops — runs fully offline).
+**Real tools that live here:** ChatGPT with tools or browsing turned on (it decides whether to search or answer directly). Claude with computer use. Cursor in agent mode (it reads the error, edits the file, runs again — the model drives the loop). Perplexity AI (searches → reads pages → synthesizes, model picks what to fetch). Open Interpreter (executes code, reads the output, keeps going). Hermes 3 on Ollama (an open-source model built specifically for tool-calling and agent loops — runs fully offline). **OpenClaw** (250k+ GitHub stars — local-first open-source agent that connects any LLM to your filesystem, shell, browser, and APIs; runs fully offline with Ollama).
 
 The moment a tool like ChatGPT or Claude gets a tool and a loop, it crosses from rung 01 to here. The model is the same. The scaffold around it is different.
 
