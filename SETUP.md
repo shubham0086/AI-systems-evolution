@@ -1,7 +1,7 @@
 # Setup
 
 ## Requirements
-- Node.js 18+ (uses the built-in `fetch` — no `npm install`, no dependencies)
+- Node.js 18+ (uses the built-in `fetch` : no `npm install`, no dependencies)
 
 ## Run it (zero setup)
 Every rung runs offline in **mock mode** by default:
@@ -15,7 +15,7 @@ node 04-agentic-team/main.js
 node 05-swarm/main.js
 ```
 
-Mock output is intentionally simple — it exists so you can *see the flow* of each
+Mock output is intentionally simple : it exists so you can *see the flow* of each
 rung instantly. The lesson is the **difference between the rungs**, not the prose.
 
 ## Run it with a real model
@@ -44,4 +44,4 @@ TOPIC="the rise of the transistor" node 05-swarm/main.js
 
 ## Python parity
 JavaScript is the reference implementation. A Python port (`shared/llm.py` +
-`main.py` per rung) is a great first contribution — see CONTRIBUTING.
+`main.py` per rung) is a great first contribution : see CONTRIBUTING.

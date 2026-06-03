@@ -1,4 +1,4 @@
-# Rung 02 — Workflow
+# Rung 02 : Workflow
 
 **A fixed chain of LLM calls: outline → draft → polish.**
 
@@ -17,4 +17,4 @@ node main.js
 This is the line most people blur. A workflow is **LLM calls on rails**. The next
 rung hands the steering wheel to the model itself.
 
-➡ Next rung: [03 — Agent](../03-agent/)
+➡ Next rung: [03 : Agent](../03-agent/)

@@ -1,4 +1,4 @@
-# Rung 01 — Single LLM Call
+# Rung 01 : Single LLM Call
 
 **One prompt in, one completion out. Stateless.**
 
@@ -14,4 +14,4 @@ node main.js          # mock
 LLM_MOCK=0 node main.js   # real model
 ```
 
-➡ Next rung chains calls together: [02 — Workflow](../02-workflow/)
+➡ Next rung chains calls together: [02 : Workflow](../02-workflow/)

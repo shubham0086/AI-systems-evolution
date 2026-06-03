@@ -1,10 +1,10 @@
-# Rung 05 — Swarm
+# Rung 05 : Swarm
 
 **Many peer agents, no central boss. Coordination is emergent.**
 
 In a team (rung 04) an orchestrator assigns roles and ordering. In a swarm, every
 agent is a peer. They each work independently, then **see each other's output and
-adjust**. The final result emerges from agents reacting to agents — nobody directed
+adjust**. The final result emerges from agents reacting to agents : nobody directed
 it.
 
 - **Adds over rung 04:** no single point of control; scales by adding peers;

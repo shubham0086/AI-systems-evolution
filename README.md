@@ -1,6 +1,6 @@
 <div align="center">
 
-# AI Systems Evolution — From Code to Swarm
+# AI Systems Evolution : From Code to Swarm
 
 **The same task, solved six times, each time with more autonomy.**
 Run each rung in under a minute (zero setup) and *feel* the jump from a plain
@@ -20,13 +20,13 @@ script to an emergent swarm.
 
 ## Why this exists
 
-Everyone uses the words — *workflow, agent, multi-agent, swarm* — and almost nobody agrees on where one ends and the next begins.
+Everyone uses the words (*workflow, agent, multi-agent, swarm*) and almost nobody agrees on where one ends and the next begins.
 
 The confusion is not semantic. It's structural. A workflow and an agent look identical from the outside: give both a task, get output back. The difference is *where the decisions live*. In a workflow, a human wrote every branch. In an agent, the model picks at runtime.
 
 Arguing about definitions doesn't fix this. Running them back-to-back does.
 
-This repo solves **one task** ("write a 3-bullet executive brief on a topic") **six times**, each time adding one increment of autonomy. The lesson is the **diff between the rungs** — which you feel by running them in sequence.
+This repo solves **one task** ("write a 3-bullet executive brief on a topic") **six times**, each time adding one increment of autonomy. The lesson is the **diff between the rungs** : which you feel by running them in sequence.
 
 ---
 
@@ -51,7 +51,7 @@ graph LR
 The two lines people always blur:
 
 - **Workflow → Agent (02 → 03):** A workflow runs on a path a *human* wrote. An agent lets the *model* choose. Two ingredients flip it: **tools** (something to act with) and a **loop** (more than one step).
-- **Team → Swarm (04 → 05):** A team has an orchestrator in charge. A swarm has no central control — coordination emerges from peers reacting to peers.
+- **Team → Swarm (04 → 05):** A team has an orchestrator in charge. A swarm has no central control : coordination emerges from peers reacting to peers.
 
 ---
 
@@ -68,7 +68,7 @@ Node 18+, no dependencies, no API keys. Runs fully offline in **mock mode** by d
 | 04 | [`04-agentic-team`](04-agentic-team/) | `node 04-agentic-team/main.js` | Planner assigns workers, reviewer approves |
 | 05 | [`05-swarm`](05-swarm/) | `node 05-swarm/main.js` | Peers improve each other's draft |
 
-Use a real model with one env var — see [`SETUP.md`](SETUP.md):
+Use a real model with one env var : see [`SETUP.md`](SETUP.md):
 
 ```bash
 LLM_MOCK=0 OLLAMA_MODEL=llama3 node 03-agent/main.js
@@ -78,7 +78,7 @@ LLM_MOCK=0 OLLAMA_MODEL=llama3 node 03-agent/main.js
 
 ## Interactive explainer
 
-Open [`web/index.html`](web/index.html) in a browser (or host it on GitHub Pages). Click any rung to see what it adds, the code, and a simulated run trace. Opens on rung 03 by default — the most important rung, where autonomy begins.
+Open [`web/index.html`](web/index.html) in a browser (or host it on GitHub Pages). Click any rung to see what it adds, the code, and a simulated run trace. Opens on rung 03 by default : the most important rung, where autonomy begins.
 
 ---
 

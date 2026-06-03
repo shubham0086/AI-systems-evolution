@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>AI Systems Evolution — From Code to Swarm</title>
+<title>AI Systems Evolution : From Code to Swarm</title>
 <style>
   :root{
     --bg:#0c0f19; --panel:#121726; --line:#1e293b; --text:#f8fafc;
@@ -49,7 +49,7 @@
 <body>
 <header>
   <h1>AI Systems Evolution</h1>
-  <p class="sub">The same task — <em>"write a 3-bullet brief on a topic"</em> — solved at six levels of autonomy. Click a rung.</p>
+  <p class="sub">The same task : <em>"write a 3-bullet brief on a topic"</em> : solved at six levels of autonomy. Click a rung.</p>
 </header>
 
 <div class="ladder" id="ladder"></div>
@@ -62,30 +62,30 @@
 
 <script>
 const RUNGS = [
-  { n:"00", t:"Plain Code", adds:"Baseline — deterministic, no model",
+  { n:"00", t:"Plain Code", adds:"Baseline : deterministic, no model",
     decides:"Human (at write time)", tools:"none", memory:"none", calls:"0",
     code:`function brief(topic){\n  return [\n    "Origin: <human fills in>",\n    "Turning point: <human fills in>",\n    "Today: <human fills in>"\n  ];\n}`,
     trace:[["step","runs hard-coded function"],["out","output is generic, no understanding"]] },
-  { n:"01", t:"Single Call", adds:"Adds intelligence — one shot, stateless",
+  { n:"01", t:"Single Call", adds:"Adds intelligence : one shot, stateless",
     decides:"Human (the prompt)", tools:"none", memory:"none", calls:"1",
     code:`const reply = await llm([\n  {role:"system", content:"concise analyst"},\n  {role:"user", content: TASK}\n]);`,
     trace:[["step","one prompt → one completion"],["out","real brief, but it can't look anything up"]] },
-  { n:"02", t:"Workflow", adds:"Adds reliability — fixed chain, on rails",
+  { n:"02", t:"Workflow", adds:"Adds reliability : fixed chain, on rails",
     decides:"Human (the pipeline)", tools:"optional", memory:"passed along", calls:"N fixed",
     code:`const outline = await llm("OUTLINE: "+TASK);\nconst draft   = await llm("DRAFT from: "+outline);\nconst final   = await llm("POLISH: "+draft);`,
     trace:[["step","1 → outline"],["step","2 → draft"],["step","3 → polish"],["out","predictable, but can't deviate"]] },
-  { n:"03", t:"Agent", adds:"Adds autonomy — the MODEL picks the path",
+  { n:"03", t:"Agent", adds:"Adds autonomy : the MODEL picks the path",
     decides:"The model", tools:"yes", memory:"within the run", calls:"N variable",
     code:`while(step++ < 5){\n  const m = await llm(messages, {tools});\n  if(m.tool_calls){ runTool(m); continue; }\n  return m.content; // model decided it's done\n}`,
-    trace:[["step","agent CHOSE: web_search('topic')"],["step","reads results, decides to answer"],["out","final brief — nobody scripted these steps"]] },
-  { n:"04", t:"Agentic Team", adds:"Adds specialization — roles + orchestrator",
+    trace:[["step","agent CHOSE: web_search('topic')"],["step","reads results, decides to answer"],["out","final brief : nobody scripted these steps"]] },
+  { n:"04", t:"Agentic Team", adds:"Adds specialization : roles + orchestrator",
     decides:"Orchestrator", tools:"yes", memory:"shared blackboard", calls:"many",
     code:`await planner();   // writes plan to blackboard\nawait worker();    // drafts using tools\nawait reviewer();  // critiques & approves`,
     trace:[["step","planner → plan"],["step","worker → draft (used a tool)"],["step","reviewer → approved"],["out","division of labor, shared state"]] },
-  { n:"05", t:"Swarm", adds:"Adds emergence — peers, no boss",
+  { n:"05", t:"Swarm", adds:"Adds emergence : peers, no boss",
     decides:"Emergent (no one)", tools:"yes", memory:"shared/peer", calls:"many",
     code:`let b = await Promise.all(peers.map(propose));   // round 1: blind\nb = await Promise.all(peers.map(p =>\n      propose(p, others(b))));                   // round 2: peer-aware`,
-    trace:[["step","round 1 — 3 peers work independently"],["step","round 2 — each sees the others & adjusts"],["out","brief emerged with no orchestrator"]] },
+    trace:[["step","round 1 : 3 peers work independently"],["step","round 2 : each sees the others & adjusts"],["out","brief emerged with no orchestrator"]] },
 ];
 
 const ladder = document.getElementById('ladder');
@@ -102,7 +102,7 @@ function select(i){
   const r=RUNGS[i];
   document.getElementById('card').innerHTML=`
     <div class="card-head">
-      <h2>Rung ${r.n} — ${r.t}</h2>
+      <h2>Rung ${r.n} : ${r.t}</h2>
       <div class="adds">${r.adds}</div>
       <div class="meta">
         <span><b>Decides the steps:</b> ${r.decides}</span>
@@ -118,7 +118,7 @@ function select(i){
       }</div></div>
     </div>`;
 }
-select(3); // open on "Agent" — the most important rung
+select(3); // open on "Agent" : the most important rung
 </script>
 </body>
 </html>
