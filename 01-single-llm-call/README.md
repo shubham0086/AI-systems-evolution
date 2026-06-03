@@ -14,4 +14,6 @@ node main.js          # mock
 LLM_MOCK=0 node main.js   # real model
 ```
 
+**You use this every day:** ChatGPT or Claude in a fresh tab — type something, get one answer, the model forgets you immediately. Gemini answering a one-off question. Any "AI writing assistant" that takes your input and returns a single response. The intelligence is real. The limitation is one shot.
+
 ➡ Next rung chains calls together: [02 : Workflow](../02-workflow/)

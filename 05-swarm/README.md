@@ -15,4 +15,6 @@ it.
 node main.js          # watch round 1 (blind) vs round 2 (peer-aware)
 ```
 
+**Real tools that live here:** OpenAI Swarm (experimental, peer agents passing context). AutoGen in swarm mode. CAMEL (agents role-play with each other until they converge on a solution). Research systems where many agents check different parts of a codebase in parallel, then compare notes. Most production shops stay at rung 04 because emergent coordination is hard to debug. Swarms appear most in research and large-scale parallelization.
+
 ⬆ Back to the top: [the full ladder](../README.md)

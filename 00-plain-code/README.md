@@ -13,4 +13,6 @@ behind it : only hard-coded text.
 node main.js
 ```
 
+**You use this every day without thinking about it:** a pocket calculator, a spell-checker that matches fixed rules, a search bar that matches exact keywords. No model behind any of it. Just code doing exactly what a human told it.
+
 ➡ Next rung adds the model: [01 : Single LLM Call](../01-single-llm-call/)
