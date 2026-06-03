@@ -8,63 +8,98 @@ script to an emergent swarm.
 
 `code` → `single call` → `workflow` → `agent` → `agentic team` → `swarm`
 
+[![Node 18+](https://img.shields.io/badge/Node-18%2B-brightgreen.svg)](https://nodejs.org)
+[![Zero dependencies](https://img.shields.io/badge/dependencies-zero-blue.svg)]()
+[![Mock mode](https://img.shields.io/badge/runs-offline%20by%20default-orange.svg)]()
+[![License: MIT](https://img.shields.io/badge/Code-MIT-lightgrey.svg)](LICENSE)
+[![Content: CC BY 4.0](https://img.shields.io/badge/Content-CC%20BY%204.0-blue.svg)](LICENSE)
+
 </div>
 
 ---
 
 ## Why this exists
 
-Everyone uses the words — *workflow, agent, multi-agent, swarm* — and almost
-nobody agrees on where one ends and the next begins. This repo settles it by
-**showing** instead of telling: one identical task ("write a 3-bullet brief on a
-topic") implemented at six levels of autonomy. The lesson is the **diff between
-the rungs**.
+Everyone uses the words — *workflow, agent, multi-agent, swarm* — and almost nobody agrees on where one ends and the next begins.
 
-It's the front door to a deeper stack:
+The confusion is not semantic. It's structural. A workflow and an agent look identical from the outside: give both a task, get output back. The difference is *where the decisions live*. In a workflow, a human wrote every branch. In an agent, the model picks at runtime.
 
+Arguing about definitions doesn't fix this. Running them back-to-back does.
+
+This repo solves **one task** ("write a 3-bullet executive brief on a topic") **six times**, each time adding one increment of autonomy. The lesson is the **diff between the rungs** — which you feel by running them in sequence.
+
+---
+
+## The autonomy ladder
+
+```mermaid
+graph LR
+    R00["00 plain code\nno model"] --> R01["01 single call\none prompt, stateless"]
+    R01 --> R02["02 workflow\nfixed chain, human wrote the path"]
+    R02 --> R03["03 agent\nLLM + tools + loop\nmodel picks the path"]
+    R03 --> R04["04 agentic team\nroles + orchestrator\n+ shared blackboard"]
+    R04 --> R05["05 swarm\npeers, no boss\ncoordination emerges"]
+
+    style R00 fill:#1e293b,stroke:#475569,color:#94a3b8
+    style R01 fill:#1e293b,stroke:#475569,color:#94a3b8
+    style R02 fill:#1e293b,stroke:#6366f1,color:#f8fafc
+    style R03 fill:#1e293b,stroke:#6366f1,color:#f8fafc,strokeWidth:3px
+    style R04 fill:#1e293b,stroke:#a855f7,color:#f8fafc
+    style R05 fill:#1e293b,stroke:#10b981,color:#10b981
 ```
-AI-systems-evolution   ← you are here (the "what" and "why", for everyone)
-        │
-        ├─▶ agent-anatomy        zoom into rung 03: what an agent is made of
-        ├─▶ agentic-patterns     the architecture theory behind the choices
-        ├─▶ agentic-systems      five runnable production-grade agent systems
-        └─▶ agentkernel          the infra engines underneath
-```
 
-## The ladder
+The two lines people always blur:
 
-| Rung | Folder | One line |
-|------|--------|----------|
-| 00 | [`00-plain-code`](00-plain-code/) | No model. Just instructions a human wrote. |
-| 01 | [`01-single-llm-call`](01-single-llm-call/) | One prompt, one answer. Stateless. |
-| 02 | [`02-workflow`](02-workflow/) | A fixed chain of calls — on rails. |
-| 03 | [`03-agent`](03-agent/) | LLM + tools + loop. The model picks the path. |
-| 04 | [`04-agentic-team`](04-agentic-team/) | Roles + orchestrator + shared state. |
-| 05 | [`05-swarm`](05-swarm/) | Peers, no boss. Coordination emerges. |
+- **Workflow → Agent (02 → 03):** A workflow runs on a path a *human* wrote. An agent lets the *model* choose. Two ingredients flip it: **tools** (something to act with) and a **loop** (more than one step).
+- **Team → Swarm (04 → 05):** A team has an orchestrator in charge. A swarm has no central control — coordination emerges from peers reacting to peers.
 
-📊 See [`COMPARISON.md`](COMPARISON.md) for the side-by-side table and the two
-lines people always blur.
+---
 
 ## Run it (zero setup)
 
-Node 18+, no dependencies, no API keys. Everything runs in **mock mode** by default.
+Node 18+, no dependencies, no API keys. Runs fully offline in **mock mode** by default.
+
+| Rung | Folder | Command | What you see |
+|------|--------|---------|--------------|
+| 00 | [`00-plain-code`](00-plain-code/) | `node 00-plain-code/main.js` | Hard-coded logic, no model call |
+| 01 | [`01-single-llm-call`](01-single-llm-call/) | `node 01-single-llm-call/main.js` | One prompt, one answer, done |
+| 02 | [`02-workflow`](02-workflow/) | `node 02-workflow/main.js` | Outline → draft → polish, on rails |
+| 03 | [`03-agent`](03-agent/) | `node 03-agent/main.js` | Model searches, then answers |
+| 04 | [`04-agentic-team`](04-agentic-team/) | `node 04-agentic-team/main.js` | Planner assigns workers, reviewer approves |
+| 05 | [`05-swarm`](05-swarm/) | `node 05-swarm/main.js` | Peers improve each other's draft |
+
+Use a real model with one env var — see [`SETUP.md`](SETUP.md):
 
 ```bash
-node 00-plain-code/main.js
-node 01-single-llm-call/main.js
-node 02-workflow/main.js
-node 03-agent/main.js
-node 04-agentic-team/main.js
-node 05-swarm/main.js
+LLM_MOCK=0 OLLAMA_MODEL=llama3 node 03-agent/main.js
 ```
 
-Use a real model with one env var (`LLM_MOCK=0`, Ollama or any OpenAI-compatible
-endpoint) — see [`SETUP.md`](SETUP.md).
+---
 
 ## Interactive explainer
 
-Open [`web/index.html`](web/index.html) in a browser (or host it on GitHub Pages):
-click any rung to see what it adds, the code, and a simulated run trace.
+Open [`web/index.html`](web/index.html) in a browser (or host it on GitHub Pages). Click any rung to see what it adds, the code, and a simulated run trace. Opens on rung 03 by default — the most important rung, where autonomy begins.
+
+---
+
+## Side-by-side comparison
+
+See [`COMPARISON.md`](COMPARISON.md) for a full table: inputs, outputs, who wrote the logic, number of LLM calls, and failure modes at each rung.
+
+---
+
+## How this fits the stack
+
+```
+AI-systems-evolution   ← you are here (the "what" and "why", for everyone)
+        |
+        ├─► Agent-Anatomy        zoom into rung 03: what an agent is made of
+        ├─► agentic-patterns     the architecture theory behind the choices
+        ├─► agentic-systems      five runnable production-grade agent systems
+        └─► agentkernel          the infra engines underneath
+```
+
+New here? This is the front door. Start at rung 00, run each one, finish at 05. Then follow any branch above.
 
 ---
 
