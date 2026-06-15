@@ -14,6 +14,10 @@ script to an emergent swarm.
 [![License: MIT](https://img.shields.io/badge/Code-MIT-lightgrey.svg)](LICENSE)
 [![Content: CC BY 4.0](https://img.shields.io/badge/Content-CC%20BY%204.0-blue.svg)](LICENSE)
 
+<br>
+
+![The Autonomy Ladder — six rungs from plain code to a swarm](ladder.svg)
+
 </div>
 
 ---
