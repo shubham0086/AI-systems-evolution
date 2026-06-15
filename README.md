@@ -37,6 +37,8 @@ graph LR
     R00["00 plain code\nno model"] --> R01["01 single call\none prompt, stateless"]
     R01 --> R02["02 workflow\nfixed chain, human wrote the path"]
     R02 --> R03["03 agent\nLLM + tools + loop\nmodel picks the path"]
+    R03 -.-> R035["03.5 agent + memory\nstate survives the run\n(bridge)"]
+    R035 -.-> R04
     R03 --> R04["04 agentic team\nroles + orchestrator\n+ shared blackboard"]
     R04 --> R05["05 swarm\npeers, no boss\ncoordination emerges"]
 
@@ -44,9 +46,16 @@ graph LR
     style R01 fill:#1e293b,stroke:#475569,color:#94a3b8
     style R02 fill:#1e293b,stroke:#6366f1,color:#f8fafc
     style R03 fill:#1e293b,stroke:#6366f1,color:#f8fafc,strokeWidth:3px
+    style R035 fill:#0f172a,stroke:#6366f1,color:#cbd5e1,stroke-dasharray:4 3
     style R04 fill:#1e293b,stroke:#a855f7,color:#f8fafc
     style R05 fill:#1e293b,stroke:#10b981,color:#10b981
 ```
+
+> **Optional half-rung (03.5): agent with memory.** The six rungs are the spine.
+> One bridge step sits between *agent* and *team*: a single agent that *remembers*
+> across runs. A team needs shared memory; first a lone agent has to have any. It is
+> marked as a dashed step because the ladder still reads as six. See
+> [`03.5-agent-with-memory`](03.5-agent-with-memory/).
 
 The two lines people always blur:
 
@@ -65,6 +74,7 @@ Node 18+, no dependencies, no API keys. Runs fully offline in **mock mode** by d
 | 01 | [`01-single-llm-call`](01-single-llm-call/) | `node 01-single-llm-call/main.js` | One prompt, one answer, done |
 | 02 | [`02-workflow`](02-workflow/) | `node 02-workflow/main.js` | Outline → draft → polish, on rails |
 | 03 | [`03-agent`](03-agent/) | `node 03-agent/main.js` | Model searches, then answers |
+| 03.5 | [`03.5-agent-with-memory`](03.5-agent-with-memory/) | `node 03.5-agent-with-memory/main.js` | Run twice: searches once, then remembers (bridge) |
 | 04 | [`04-agentic-team`](04-agentic-team/) | `node 04-agentic-team/main.js` | Planner assigns workers, reviewer approves |
 | 05 | [`05-swarm`](05-swarm/) | `node 05-swarm/main.js` | Peers improve each other's draft |
 

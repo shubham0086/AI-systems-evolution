@@ -49,7 +49,7 @@
 <body>
 <header>
   <h1>AI Systems Evolution</h1>
-  <p class="sub">The same task : <em>"write a 3-bullet brief on a topic"</em> : solved at six levels of autonomy. Click a rung.</p>
+  <p class="sub">The same task : <em>"write a 3-bullet brief on a topic"</em> : solved at six levels of autonomy, plus one bridge. Click a rung.</p>
 </header>
 
 <div class="ladder" id="ladder"></div>
@@ -78,6 +78,10 @@ const RUNGS = [
     decides:"The model", tools:"yes", memory:"within the run", calls:"N variable",
     code:`while(step++ < 5){\n  const m = await llm(messages, {tools});\n  if(m.tool_calls){ runTool(m); continue; }\n  return m.content; // model decided it's done\n}`,
     trace:[["step","agent CHOSE: web_search('topic')"],["step","reads results, decides to answer"],["out","final brief : nobody scripted these steps"]] },
+  { n:"03.5", t:"Agent + Memory", adds:"Adds persistence : state survives the run (bridge)",
+    decides:"The model", tools:"yes", memory:"persists across runs", calls:"N, fewer on a recall",
+    code:`const mem = load();          // read disk\nif(mem[topic]) feed(mem[topic]);  // HIT: skip the search\nconst m = await llm(messages,{tools});\nif(searched(m)) save(mem, result); // remember for next time`,
+    trace:[["step","run 1 : MISS, agent searches, writes to disk"],["step","run 2 : HIT, recalls from disk, no tool call"],["out","same agent, second run is faster and tool-free"]] },
   { n:"04", t:"Agentic Team", adds:"Adds specialization : roles + orchestrator",
     decides:"Orchestrator", tools:"yes", memory:"shared blackboard", calls:"many",
     code:`await planner();   // writes plan to blackboard\nawait worker();    // drafts using tools\nawait reviewer();  // critiques & approves`,

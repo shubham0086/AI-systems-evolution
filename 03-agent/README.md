@@ -22,4 +22,5 @@ The moment a tool like ChatGPT or Claude gets a tool and a loop, it crosses from
 > Want to dissect a single agent organ by organ? See the companion repo
 > **agent-anatomy**, which zooms all the way into this rung.
 
+➡ Optional bridge, give this agent a memory that survives the run: [03.5 : Agent with Memory](../03.5-agent-with-memory/)
 ➡ Next rung adds more agents: [04 : Agentic Team](../04-agentic-team/)

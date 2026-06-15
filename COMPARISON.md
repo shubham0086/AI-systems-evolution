@@ -8,6 +8,7 @@ Same task at every rung : *"write a 3-bullet brief on a topic."* Only the autono
 | **01** Single call | One prompt | Human (the prompt) | none | none | 1 | High | A one-shot answer is enough |
 | **02** Workflow | Fixed chain | Human (the pipeline) | optional | passed along | N (fixed) | High | Steps are known and stable |
 | **03** Agent | LLM + tools + loop | **The model** | yes | within the run | N (variable) | Medium | The path can't be known upfront |
+| **03.5** Agent + memory | Same agent, persistent store | The model | yes | **survives the run** | N, fewer on a recall | Medium | The agent should not relearn what it already knows |
 | **04** Agentic team | Roles + orchestrator | Orchestrator | yes | shared blackboard | many | Medium | Work splits into specialties |
 | **05** Swarm | Peers, no boss | **Emergent** | yes | shared/peer | many | Low | Scale and robustness over control |
 

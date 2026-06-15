@@ -1,0 +1,6 @@
+# Runtime memory written by rung 03.5 (agent-with-memory demo)
+.agent-memory.json
+**/.agent-memory.json
+
+# Node
+node_modules/
