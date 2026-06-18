@@ -8,6 +8,8 @@ script to an emergent swarm.
 
 `code` → `single call` → `workflow` → `agent` → `agentic team` → `swarm`
 
+> For project walkthroughs, architecture flowcharts, and system context, visit the live landing page: [my-portfolio-github-io-beta-five.vercel.app/projects/ai-systems-evolution.html](https://my-portfolio-github-io-beta-five.vercel.app/projects/ai-systems-evolution.html)
+
 [![Node 18+](https://img.shields.io/badge/Node-18%2B-brightgreen.svg)](https://nodejs.org)
 [![Zero dependencies](https://img.shields.io/badge/dependencies-zero-blue.svg)]()
 [![Mock mode](https://img.shields.io/badge/runs-offline%20by%20default-orange.svg)]()
